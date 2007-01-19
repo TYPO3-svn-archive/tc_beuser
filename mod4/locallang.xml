@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for module &quot;txtcbeuserM1_txtcbeuserM4&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="overview-groups">Group Overview</label>
+			<label index="overview-users">User Overview</label>
+			<label index="showCol-groups">Groups</label>
+			<label index="showCol-members">Members</label>
+			<label index="showCol-filemounts">Filemounts</label>
+			<label index="showCol-webmounts">Webmounts</label>
+			<label index="showCol-pagetypes">Page types access</label>
+			<label index="showCol-selecttables">Select tables</label>
+			<label index="showCol-modifytables">Modify tables</label>
+			<label index="showCol-nonexcludefields">Non-exclude fields</label>
+			<label index="showCol-explicitallowdeny">Explicit Allow/Deny</label>
+			<label index="showCol-limittolanguages">Limit to languages</label>
+			<label index="showCol-workspaceperms">Workspace permissions</label>
+			<label index="showCol-workspacememship">Workspace membership</label>
+			<label index="showCol-description">Description</label>
+			<label index="showCol-modules">Modules</label>
+			<label index="showCol-tsconfig">TSconfig</label>
+			<label index="showCol-tsconfighl">TSconfig HL</label>
+			<label index="analyze">Analyze</label>
+			<label index="showInfo">Display Information</label>
+			<label index="select-group">Select a group</label>
+			<label index="select-user">Select a user</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="overview-groups">Gruppen Übersicht</label>
+			<label index="overview-users">Benutzer Übersicht</label>
+			<label index="showCol-groups">Gruppen</label>
+			<label index="showCol-members">Mitglieder</label>
+			<label index="showCol-filemounts">Filemounts</label>
+			<label index="showCol-webmounts">Webmounts</label>
+			<label index="showCol-pagetypes">Seiten Typen</label>
+			<label index="showCol-selecttables">Tabellen (listing)</label>
+			<label index="showCol-modifytables">Tabellen (modify)</label>
+			<label index="showCol-nonexcludefields">Erlaubte Excludefelder</label>
+			<label index="showCol-explicitallowdeny">Explizit erlaubt/verboten</label>
+			<label index="showCol-limittolanguages">Sprachenbeschränkung</label>
+			<label index="showCol-workspaceperms">Workspace Zugriff</label>
+			<label index="showCol-workspacememship">Workspace Mitgliedschaft</label>
+			<label index="showCol-description">Beschreibung</label>
+			<label index="showCol-modules">Module</label>
+			<label index="showCol-tsconfig">TSconfig</label>
+			<label index="showCol-tsconfighl">TSconfig HL</label>
+			<label index="analyze">Analysieren</label>
+			<label index="showInfo">Informationen anzeigen</label>
+			<label index="select-group">Eine Gruppe auswählen</label>
+			<label index="select-user">Ein Benutzer auswählen</label>
+		</languageKey>
+	</data>
+</T3locallang>

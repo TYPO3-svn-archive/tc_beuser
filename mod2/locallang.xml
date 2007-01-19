@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for module &quot;txtcbeuserM1_txtcbeuserM2&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="title">Backend User Administration</label>
+			<label index="list-users">List Users</label>
+			<label index="create-user-wizard">Import frontend user</label>
+			<label index="create-user">Create a new user</label>
+			<label index="edit-user">Edit a user</label>
+			<label index="hide-deaktivated-users">Hide deactivated users</label>
+			<label index="search-user">Search user:</label>
+			<label index="analyze">Analyze</label>
+			<label index="password-wizard">Generate password</label>
+			<label index="analyze">Analyze</label>
+			<label index="edit">Edit record</label>
+			<label index="showInfo">Display Information</label>
+			<label index="unHide">Un-hide record</label>
+			<label index="hide">Hide record</label>
+			<label index="delete">Delete record (!)</label>
+			<label index="import">Import this record</label>
+			<label index="not-found">No user found</label>
+			<label index="data-sync">Backend User data is not synchronous with Frontend User data.</label>
+			<label index="fe-exist">FE-User with the same username is existed.</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="list-users">Benutzer auflisten</label>
+			<label index="create-user-wizard">Frontend Benutzer importieren</label>
+			<label index="create-user">Einen neuen Benutzer anlegen</label>
+			<label index="edit-user">Einen Benutzer bearbeiten</label>
+			<label index="hide-deaktivated-users">Deaktivierte Benutzer ausblenden</label>
+			<label index="search-user">Benutzer suchen:</label>
+			<label index="password-wizard">Kennwort generieren</label>
+			<label index="analyze">Analysieren</label>
+			<label index="edit">Datensatz bearbeiten</label>
+			<label index="showInfo">Informationen anzeigen</label>
+			<label index="unHide">Datensatz nicht verbergen</label>
+			<label index="hide">Datensatz verbergen</label>
+			<label index="delete">Datensatz löschen (!)</label>
+			<label index="import">Dieses Datensatz importieren</label>
+			<label index="not-found">Keine Benutzer gefunden</label>
+			<label index="data-sync">Backend Benutzerdaten sind nicht synchron mit Frontend Benutzerdaten.</label>
+			<label index="fe-exist">Es existiert FE-Benutzer mit dem selben Benutzername.</label>
+		</languageKey>
+	</data>
+</T3locallang>

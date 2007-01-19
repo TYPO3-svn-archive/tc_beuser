@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for module &quot;txtcbeuserM1_txtcbeuserM5&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="title">Filemounts View</label>
+			<label index="list-filemounts">List filemounts</label>
+			<label index="create-filemount">Create new filemount</label>
+			<label index="search-filemount">Search filemount:</label>
+			<label index="error-path">Path exists</label>
+			<label index="showInfo">Display Information</label>
+			<label index="unHide">Un-hide record</label>
+			<label index="hide">Hide record</label>
+			<label index="delete">Delete record (!)</label>
+			<label index="filemount-msg">The path is relative to fileadmin</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="title">Filemounts Übersicht</label>
+			<label index="list-filemounts">Filemounts auflisten</label>
+			<label index="create-filemount">Einen neuen Filemount anlegen</label>
+			<label index="search-filemount">Filemount suchen:</label>
+			<label index="error-path">Pfad existiert</label>
+			<label index="showInfo">Informationen anzeigen</label>
+			<label index="unHide">Datensatz nicht verbergen</label>
+			<label index="hide">Datensatz verbergen</label>
+			<label index="delete">Datensatz löschen (!)</label>
+			<label index="filemount-msg">Der Pfad ist relativ zum fileadmin</label>
+		</languageKey>
+	</data>
+</T3locallang>
