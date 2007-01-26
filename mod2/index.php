@@ -484,6 +484,7 @@ class  tx_tcbeuser_module2 extends t3lib_SCbase {
 	}
 	
 	function getUserList() {
+debug($GLOBALS['BE_USER']);
 		$content = '';
 		$dblist = t3lib_div::makeInstance('tx_tcbeuser_recordList');
 		$dblist->permChecker = &$this->permChecker;

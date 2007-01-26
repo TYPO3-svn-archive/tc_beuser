@@ -21,10 +21,10 @@
     <target name="init">
     	
     	<!-- set parameter -->
-    	<property name="dir.target" value="D:\Projects\dkd\T-Online BE User Admin\www\html\typo3conf\ext\tc_beuser" />
-    	<property name="dir.target.conf" value="D:\Projects\dkd\T-Online BE User Admin\www\html\typo3conf"/>
-		<property name="dir.src" value="D:\Projects\dkd\T-Online BE User Admin\Projectfiles\tc_beuser" />
-    	    	
+    	<property name="dir.src" value="/Users/ingo/Projects/Extensions/tx_tcbeuser" />
+    	<property name="dir.target" value="/Users/ingo/Projects/d.k.d/T-Online BE User Admin/www/html/typo3conf/ext/tc_beuser" />
+    	<property name="dir.target.conf" value="/Users/ingo/Projects/d.k.d/T-Online BE User Admin/www/html/typo3conf"/>
+		    	
     </target>
 
 	<!-- - - - - - - - - - - - - - - - - - 

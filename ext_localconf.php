@@ -2,7 +2,6 @@
 
 if (!defined ('TYPO3_MODE')) 	die ('Access denied.');
 
-
 if (TYPO3_MODE == 'BE')	{
 	require_once( t3lib_extMgm::extPath( $_EXTKEY, 'class.tx_tcbeuser_hooks.php' ) );
 	require_once( t3lib_extMgm::extPath( $_EXTKEY, 'class.tx_tcbeuser_config.php' ) );

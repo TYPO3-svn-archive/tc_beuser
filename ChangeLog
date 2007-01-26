@@ -1,6 +1,9 @@
-(add new changes on top of this file)
+2007-01-26 Ingo Renner <ingo.renner@dkd.de>
+
+	* non admin user can't see admin users anymore
 
 2006-11-03 Thorsten Kahler <thorsten.kahler@dkd.de>
+
 	* tx_tcbeuser_overview::makeUserControl(): su-Links/-Buttons nur anzeigen, wenn BE_USER Admin ist
 	* tx_tcbeuser_module4::makeUserControl(): su-Links/-Buttons nur anzeigen, wenn BE_USER Admin ist
 

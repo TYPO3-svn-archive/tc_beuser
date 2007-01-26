@@ -212,6 +212,11 @@ class tx_tcbeuser_recordList extends localRecordList {
 				.$GLOBALS['TCA'][$table]['ctrl']['enablecolumns']['disabled']
 				.' = 0';
 		}
+		
+			//ingo.renner@dkd.de
+		if($GLOBALS['BE_USER']->user['admin'] == '0' && $table == 'be_users') {
+			$addWhere .= ' AND admin = 0';
+		}
 
 		//dkd-kartolo
 		//mod2, exclude fe_user which is also be_user
