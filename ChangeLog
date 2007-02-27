@@ -1,3 +1,7 @@
+2007-02-26 Ingo Renner <ingo.renner@dkd.de>
+
+	* class.tx_tcbeuser_editform.php could not get loaded in mod3
+
 2007-01-26 Ingo Renner <ingo.renner@dkd.de>
 
 	* non admin user can't see admin users anymore
