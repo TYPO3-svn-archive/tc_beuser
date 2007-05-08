@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for module &quot;txtcbeuserM1_txtcbeuserM3&quot;</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="title">Group Admin</label>
+			<label index="list-groups">List groups</label>
+			<label index="create-group">Create a new group</label>
+			<label index="edit-group">Edit a group</label>
+			<label index="search-group">Search group:</label>
+			<label index="analyze">Analyze</label>
+			<label index="edit">Edit record</label>
+			<label index="showInfo">Display Information</label>
+			<label index="unHide">Un-hide record</label>
+			<label index="hide">Hide record</label>
+			<label index="delete">Delete record (!)</label>
+			<label index="not-found">No groups found</label>
+			<label index="group-exists">A group with the same name is existed.</label>
+			<label index="tsconfig-disabled">TSconfig field is disabled.</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="title">Gruppen Administrator</label>
+			<label index="list-groups">Gruppen auflisten</label>
+			<label index="create-group">Eine neue Gruppe anlegen</label>
+			<label index="edit-group">Eine Gruppe bearbeiten</label>
+			<label index="search-group">Gruppe suchen:</label>
+			<label index="analyze">Analysieren</label>
+			<label index="edit">Datensatz bearbeiten</label>
+			<label index="showInfo">Informationen anzeigen</label>
+			<label index="unHide">Datensatz nicht verbergen</label>
+			<label index="hide">Datensatz verbergen</label>
+			<label index="delete">Datensatz löschen (!)</label>
+			<label index="not-found">Keine Gruppe gefunden</label>
+			<label index="group-exists">Es existiert BE-Gruppe mit dem selben Name</label>
+			<label index="tsconfig-disabled">Die Bearbeitung des TSconfigs steht nicht zur Verfügung</label>
+		</languageKey>
+	</data>
+</T3locallang>

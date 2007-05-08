@@ -1,0 +1,30 @@
+2007-05-04 Ingo Renner <ingo.renner@dkd.de>
+
+	* fixed bug with missing hook class when in FE edit mode
+
+2006-11-03 Thorsten Kahler <thorsten.kahler@dkd.de>
+
+	* tx_tcbeuser_overview::makeUserControl(): su-Links/-Buttons nur anzeigen, wenn BE_USER Admin ist
+	* tx_tcbeuser_module4::makeUserControl(): su-Links/-Buttons nur anzeigen, wenn BE_USER Admin ist
+
+06-10-10 Ivan Kartolo <ivan.kartolo@dkd.de>
+
+	* add, list and edit wizards are not shown
+	* Status is set to stable and version is set to 1.0.0
+
+06-09-26 Ivan Kartolo <ivan.kartolo@dkd.de>
+	
+	* Checkboxes in overview are not shown, as long as no user or group is chosen
+	* If user is hidden, switch icon is not linked.
+
+06-08-29 Ivan Kartolo <ivan.kartolo@dkd.de>
+	
+	* User Configuration per TS 
+
+06-08-24 Olivier Dobberkau <olivier.dobberkau@dkd.de>
+	
+	* First Beta Version for Client due on 06-08-25
+	
+06-07-28 Ingo Renner  <ingo.renner@dkd.de>
+
+	* Initial release

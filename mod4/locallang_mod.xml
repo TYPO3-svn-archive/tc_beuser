@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for module &quot;txtcbeuserM1_txtcbeuserM4&quot; - header, description</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="mlang_tabs_tab">Overview</label>
+			<label index="mlang_labels_tabdescr">Shows an overview of users or groups and their permissions and group hierarchy relations.</label>
+			<label index="mlang_labels_tablabel">User and groups relations overview.</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="mlang_tabs_tab">Übersicht</label>
+			<label index="mlang_labels_tabdescr">Zeigt eine Übersicht von BE-Benutzern und -Gruppen sowie der Rechte und der Gruppen-Relationen.</label>
+			<label index="mlang_labels_tablabel">BE-Benutzer- und -Gruppen-Übersicht.</label>
+		</languageKey>
+	</data>
+</T3locallang>

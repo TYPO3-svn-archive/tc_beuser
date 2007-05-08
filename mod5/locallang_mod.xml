@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for module &quot;txtcbeuserM1_txtcbeuserM5&quot; - header, description</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="mlang_tabs_tab">Filemounts View</label>
+			<label index="mlang_labels_tablabel">Module to view and administer filemounts.</label>
+			<label index="mlang_labels_tabdescr">Module to view and administer filemounts.</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="mlang_tabs_tab">Filemount Übersicht</label>
+			<label index="mlang_labels_tablabel">Anzeige und Verwaltung von Dateifreigaben.</label>
+			<label index="mlang_labels_tabdescr">Modul zum Anzeigen, Verwalten und Anlegen von Dateifreigaben.</label>
+		</languageKey>
+	</data>
+</T3locallang>
