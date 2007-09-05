@@ -27,6 +27,7 @@ unset($MCONF);
 require_once('conf.php');
 require_once($BACK_PATH.'init.php');
 require_once($BACK_PATH.'template.php');
+
 $extPath = t3lib_extMgm::extPath('tc_beuser');
 require_once($extPath.'class.tx_tcbeuser_recordlist.php');
 require_once($extPath.'class.tx_tcbeuser_overview.php');

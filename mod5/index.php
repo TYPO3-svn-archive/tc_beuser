@@ -28,7 +28,9 @@ unset($MCONF);
 require_once('conf.php');
 require_once($BACK_PATH.'init.php');
 require_once($BACK_PATH.'template.php');
-require_once(t3lib_extMgm::extPath('tc_beuser').'class.tx_tcbeuser_recordlist.php');
+
+$extPath = t3lib_extMgm::extPath('tc_beuser');
+require_once($extPath.'class.tx_tcbeuser_recordlist.php');
 $LANG->includeLLFile('EXT:tc_beuser/mod5/locallang.xml');
 $LANG->includeLLFile('EXT:lang/locallang_alt_doc.xml');
 require_once(PATH_t3lib.'class.t3lib_scbase.php');
