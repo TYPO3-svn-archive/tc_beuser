@@ -1,4 +1,4 @@
-2007-09-05 Ingo Renner <ing.renner@dkd.de>
+2007-09-05 Ingo Renner <ingo.renner@dkd.de>
 
 	* class.tx_tcbeuser_editform.php could not get loaded in mod5
 
