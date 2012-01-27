@@ -245,7 +245,7 @@ class tx_tcbeuser_overview {
 		$tCells = array();
 		
 			// title:
-		$rowTitle = $treeRow['HTML'].' '.$treeRow['row']['title'];
+		$rowTitle = $treeRow['HTML'].' '.htmlspecialchars($treeRow['row']['title']);
 		$tCells[] = $this->wrapTd($rowTitle, 'nowrap="nowrap"', $class);
 			// id
 		$tCells[] = $this->wrapTd($treeRow['row']['uid'], 'nowrap="nowrap"', $class);

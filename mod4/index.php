@@ -390,7 +390,7 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 		$content = '';
 		
 		$alttext = t3lib_BEfunc::getRecordIconAltText($userRecord, $this->table);
-		$recTitle = t3lib_BEfunc::getRecordTitle($this->table, $userRecord);
+		$recTitle = htmlspecialchars(t3lib_BEfunc::getRecordTitle($this->table, $userRecord));
 		
 			// icon
 		$iconImg = t3lib_iconWorks::getIconImage(
