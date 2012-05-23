@@ -1,3 +1,7 @@
+2012-06-24 Ivan Kartolo <ivan.kartolo@dkd.de>
+	* Bug #37394: remove deprecated view_array calls
+	* Bug #31855: hide _cli User from non admin user
+
 2007-09-05 Ingo Renner <ingo.renner@dkd.de>
 
 	* class.tx_tcbeuser_editform.php could not get loaded in mod5
@@ -9,7 +13,7 @@
 2007-02-26 Ingo Renner <ingo.renner@dkd.de>
 
 	* class.tx_tcbeuser_editform.php could not get loaded in mod3
-	
+
 2007-01-26 Ingo Renner <ingo.renner@dkd.de>
 
 	* non admin user can't see admin users anymore
@@ -25,18 +29,18 @@
 	* Status is set to stable and version is set to 1.0.0
 
 06-09-26 Ivan Kartolo <ivan.kartolo@dkd.de>
-	
+
 	* Checkboxes in overview are not shown, as long as no user or group is chosen
 	* If user is hidden, switch icon is not linked.
 
 06-08-29 Ivan Kartolo <ivan.kartolo@dkd.de>
-	
-	* User Configuration per TS 
+
+	* User Configuration per TS
 
 06-08-24 Olivier Dobberkau <olivier.dobberkau@dkd.de>
-	
+
 	* First Beta Version for Client due on 06-08-25
-	
+
 06-07-28 Ingo Renner  <ingo.renner@dkd.de>
 
 	* Initial release
