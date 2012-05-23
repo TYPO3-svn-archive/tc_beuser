@@ -32,21 +32,21 @@ $extPath = t3lib_extMgm::extPath('tc_beuser');
  * $Id$
  *
  * @author Ivan Kartolo <ivan.kartolo@dkd.de>
- */ 
+ */
 class tx_tcbeuser_pwd_wizard {
 
 var $backPath = '../../../../typo3/';
 
 	function main($PA, $pObj) {
-		$output .= '<script src="pwdgen.js" type="text/javascript"></script>';
+		$output = '<script src="pwdgen.js" type="text/javascript"></script>';
 		$onclick = 'pass = mkpass();' .
 					'document.'.$PA['formName'].'[\''.$PA['itemName'].'\'].value = pass;';
 		$onclick .= implode('',$PA['fieldChangeFunc']);
-		
-		$output .= '<a href="#" onclick="'.htmlspecialchars($onclick).'">'. 
+
+		$output .= '<a href="#" onclick="'.htmlspecialchars($onclick).'">'.
 			'<img src="'.$this->backPath.'gfx/insert1.gif" width="16" height="16" hspace="8" class="absmiddle" ' .
 					'title="' . $GLOBALS['LANG']->sL('LLL:EXT:tc_beuser/mod2/locallang.xml:password-wizard', 1).'" />' .
-			'</a>'; 
+			'</a>';
 		return $output;
 	}
 }

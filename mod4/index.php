@@ -46,7 +46,7 @@ $BE_USER->modAccess($MCONF,1);	// This checks permissions and exits if the users
  * @subpackage	tx_tcbeuser
  */
 class  tx_tcbeuser_module4 extends t3lib_SCbase {
-	
+
 	var $content;
 	var $doc;
 	var $jsCode;
@@ -60,80 +60,80 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 
 	function main() {
 		$this->init();
-	
+
 		// The page will show only if there is a valid page and if this page may be viewed by the user
 		#$this->pageinfo = tx_tcbeuser_access::readPageAccess();
-		#$access = is_array($this->pageinfo) ? 1 : 0;	
-		
+		#$access = is_array($this->pageinfo) ? 1 : 0;
+
 		//TODO more access check!?
-		$access = $GLOBALS['BE_USER']->modAccess($this->MCONF, true);	
-	
+		$access = $GLOBALS['BE_USER']->modAccess($this->MCONF, true);
+
 		if ($access || $GLOBALS['BE_USER']->isAdmin()) {
-			
+
 			$this->pageinfo['_thePath'] = '/';
-			
+
 			if(t3lib_div::_GP('beUser')){
 				$this->MOD_SETTINGS['function'] = 2;
-			} 
-			
+			}
+
 			if(t3lib_div::_GP('beGroup')){
 				$this->MOD_SETTINGS['function'] = 1;
 			}
-			
+
 			if($this->MOD_SETTINGS['function'] == 1) {
 				$title = $GLOBALS['LANG']->getLL('overview-groups');
 			} elseif($this->MOD_SETTINGS['function'] == 2) {
 				$title = $GLOBALS['LANG']->getLL('overview-users');
 			}
-			
+
 			$menu  = t3lib_BEfunc::getFuncMenu(
 				$this->id,
 				'SET[function]',
 				$this->MOD_SETTINGS['function'],
 				$this->MOD_MENU['function']
 			);
-	
+
 			$moduleContent = $this->moduleContent();
-			
+
 				// all necessary JS code needs to be set before this line!
 			$this->doc->JScode = $this->doc->wrapScriptTags($this->jsCode);
 			$this->doc->JScode .= '
 					<script src="prototype.js" type="text/javascript"></script>
 					<script src="ajax.js" type="text/javascript"></script>';
-			
+
 			$this->content  = '';
 			$this->content .= $this->doc->startPage($title);
 			$this->content .= $this->doc->spacer(5);
-			$this->content .= $this->doc->section( 
+			$this->content .= $this->doc->section(
 				'',
 				$this->doc->funcMenu(
 					$this->doc->header($title),
 					$menu
 				)
 			);
-			$this->content .= $this->doc->divider(5);			
+			$this->content .= $this->doc->divider(5);
 			$this->content .= $moduleContent;
-			
+
 			if ($GLOBALS['BE_USER']->mayMakeShortcut())	{
 				$this->content .= $this->doc->spacer(20).
 							$this->doc->section('',$this->doc->makeShortcutIcon('','',$this->MCONF['name']));
-			}			
+			}
 		}
-		
+
 		$GLOBALS['BE_USER']->user['admin'] = 0;
 	}
-	
-	function init() {	
+
+	function init() {
 		parent::init();
-		
+
 		$this->switchUser(t3lib_div::_GP('SwitchUser'));
-		
+
 		$this->backPath = $GLOBALS['BACK_PATH'];
-		
+
 		$this->doc = t3lib_div::makeInstance('bigDoc');
 		$this->doc->backPath = $this->backPath;
 		$this->doc->docType  = 'xhtml_trans';
-		$this->doc->form = '<form action="" method="post">';	
+		$this->doc->form = '<form action="" method="post">';
 			// JavaScript
 		$this->doc->postCode='
 			<script language="javascript" type="text/javascript">
@@ -141,19 +141,19 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 				if (top.fsMod) top.fsMod.recentIds["web"] = 0;
 			</script>
 		';
-		
+
 		$this->jsCode = '
 			script_ended = 0;
 			function jumpToUrl(URL)	{
 				document.location = URL;
 			}
-			
+
 			var T3_BACKPATH = \''.$this->doc->backPath.'\';
 		';
 		$this->jsCode .= $this->doc->redirectUrls(t3lib_div::linkThisScript());
-		
+
 		$this->id = 0;
-		
+
 			// update compareFlags
 		if (t3lib_div::_GP('ads'))	{
 			$this->compareFlags = t3lib_div::_GP('compareFlags');
@@ -161,11 +161,11 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 		} else {
 			$this->compareFlags = $GLOBALS['BE_USER']->getModuleData('txtcbeuserM1_txtcbeuserM4/index.php/compare','ses');
 		}
-		
+
 			// Setting return URL
 		$this->returnUrl = t3lib_div::_GP('returnUrl');
 		$this->retUrl    = $this->returnUrl ? $this->returnUrl : 'dummy.php';
-		
+
 			//init user / group
 		$beuser = t3lib_div::_GET('beUser');
 		if($beuser) {
@@ -175,8 +175,8 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 		if($begroup) {
 			$this->be_group = $begroup;
 		}
-	}	
-	
+	}
+
 	/**
 	 * Adds items to the ->MOD_MENU array. Used for the function menu selector.
 	 *
@@ -189,12 +189,12 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 				'2' => $GLOBALS['LANG']->getLL('overview-users'),
 			)
 		);
-		
+
 		$groupOnly = array();
 		if($this->MOD_SETTINGS['function'] == 1) { // groups
 			$groupOnly['members'] = $GLOBALS['LANG']->getLL('showCol-members');
 		}
-		
+
 		$groupAndUser = array(
 			'filemounts'        => $GLOBALS['LANG']->getLL('showCol-filemounts'),
 			'webmounts'         => $GLOBALS['LANG']->getLL('showCol-webmounts'),
@@ -210,12 +210,12 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 			'modules'           => $GLOBALS['LANG']->getLL('showCol-modules'),
 			'tsconfig'          => $GLOBALS['LANG']->getLL('showCol-tsconfig'),
 			'tsconfighl'        => $GLOBALS['LANG']->getLL('showCol-tsconfighl'),
-		);		
+		);
 		$this->MOD_MENU['showCols'] = array_merge($groupOnly, $groupAndUser);
-			
+
 		parent::menuConfig();
 	}
-	
+
 	/**
 	 * Generates the module content
 	 *
@@ -223,46 +223,39 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 	 */
 	function moduleContent() {
 		$content = '';
-				
-		$debug_content = '<br /><br /><br />This is the GET/POST vars sent to the script:<br />'.
-			'GET:'.t3lib_div::view_array($_GET).'<br />'.
-			'POST:'.t3lib_div::view_array($_POST).'<br />'.
-			'';
 
 		switch((string)$this->MOD_SETTINGS['function'])	{
 			case '1':
-					// group view					
+					// group view
 				$content .= $this->doc->section(
-					'', 
+					'',
 					$this->getGroupView($this->be_group)
 				);
-//				$content .= $debug_content;
 			break;
 			case '2':
 					// user view
 				$content .= $this->doc->section(
-					'', 
+					'',
 					$this->getUserView($this->be_user)
 				);
-//				$content .= $debug_content;
 			break;
 		}
-		
+
 		return $content;
 	}
-	
+
 	function printContent()	{
 		$this->content .= $this->doc->endPage();
 		echo $this->content;
 	}
-	
+
 	function getUserView($userUid) {
 		$content = '';
-		
+
 		if($this->be_user == 0) {
 				//warning - no user selected
 			$content .= $GLOBALS['LANG']->getLL('select-user');
-			
+
 			$this->id = 0;
 			$this->search_field = t3lib_div::_GP('search_field');
 			$this->pointer = t3lib_div::intInRange(
@@ -271,7 +264,7 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 				100000
 			);
 			$this->table = 'be_users';
-			
+
 			$dblist = t3lib_div::makeInstance('tx_tcbeuser_recordList');
 			$dblist->backPath = $this->doc->backPath;
 			$dblist->script = $this->MCONF['script'];
@@ -279,15 +272,15 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 			$dblist->userMainGroupOnly = true;
 			$dblist->calcPerms = $GLOBALS['BE_USER']->calcPerms($this->pageinfo);
 			$dblist->showFields = array('username', 'realName', 'usergroup');
-			$dblist->disableControls = array('edit' => true, 'hide' => true, 'delete' => true, 'import' => true); 
-			
+			$dblist->disableControls = array('edit' => true, 'hide' => true, 'delete' => true, 'import' => true);
+
 			//Setup for analyze Icon
 			$dblist->analyzeLabel = $GLOBALS['LANG']->sL('LLL:EXT:tc_beuser/mod2/locallang.xml:analyze',1);
 			$dblist->analyzeParam = 'beUser';
-			
+
 			$dblist->start(0, $this->table, $this->pointer, $this->search_field);
 			$dblist->generateList();
-			
+
 			$content .= $dblist->HTMLcode ? $dblist->HTMLcode : '<br />'.$GLOBALS['LANG']->sL('LLL:EXT:tc_beuser/mod2/locallang.xml:not-found').'<br />';
 			$content .= $dblist->getSearchBox(
 				false,
@@ -296,23 +289,23 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 		} else {
 				//real content
 			$this->table = 'be_users';
-			$userRecord = t3lib_BEfunc::getRecord($this->table, $userUid);		
+			$userRecord = t3lib_BEfunc::getRecord($this->table, $userUid);
 			$content .= $this->getColSelector();
 			$content .= '<br />';
 			$content .= $this->getUserViewHeader($userRecord);
 			$userView = t3lib_div::makeInstance('tx_tcbeuser_overview');
-			
-			//if there is member in the compareFlags array, remove it. There is no 'member' in user view 
+
+			//if there is member in the compareFlags array, remove it. There is no 'member' in user view
 			unset($this->compareFlags['members']);
 			$content .= $userView->getTable($userRecord, $this->compareFlags);
 		}
-		
+
 		return $content;
 	}
-	
+
 	function getGroupView($groupUid) {
 		$content = '';
-		
+
 		if($this->be_group == 0) {
 				//warning - no user selected
 			$content .= $GLOBALS['LANG']->getLL('select-group');
@@ -325,7 +318,7 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 				100000
 			);
 			$this->table = 'be_groups';
-			
+
 			$dblist = t3lib_div::makeInstance('tx_tcbeuser_recordList');
 			$dblist->backPath = $this->doc->backPath;
 			$dblist->script = $this->MCONF['script'];
@@ -333,82 +326,82 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 			$dblist->userMainGroupOnly = true;
 			$dblist->calcPerms = $GLOBALS['BE_USER']->calcPerms($this->pageinfo);
 			$dblist->showFields = array('title');
-			$dblist->disableControls = array('edit' => true, 'hide' => true, 'delete' => true, 'history' => true, 'new' => true, 'import' => true); 
-			
+			$dblist->disableControls = array('edit' => true, 'hide' => true, 'delete' => true, 'history' => true, 'new' => true, 'import' => true);
+
 			//Setup for analyze Icon
 			$dblist->analyzeLabel = $GLOBALS['LANG']->sL('LLL:EXT:tc_beuser/mod3/locallang.xml:analyze',1);
 			$dblist->analyzeParam = 'beGroup';
-			
+
 			$dblist->start(0, $this->table, $this->pointer, $this->search_field);
 			$dblist->generateList();
-			
+
 			$content .= $dblist->HTMLcode ? $dblist->HTMLcode : '<br />'.$GLOBALS['LANG']->sL('LLL:EXT:tc_beuser/mod3/locallang.xml:not-found').'<br />';
 			$content .= $dblist->getSearchBox(
 				false,
 				$GLOBALS['LANG']->sL('LLL:EXT:tc_beuser/mod3/locallang.xml:search-group',1)
 			);
-			
+
 		} else {
 				//real content
 			$this->table = 'be_groups';
-			$groupRecord = t3lib_BEfunc::getRecord($this->table, $groupUid);	
+			$groupRecord = t3lib_BEfunc::getRecord($this->table, $groupUid);
 			$content .= $this->getColSelector();
 			$content .= '<br />';
 //			$content .= $this->getUserViewHeader($groupRecord);
-		
+
 			$userView = t3lib_div::makeInstance('tx_tcbeuser_overview');
 			$content .= $userView->getTableGroup($groupRecord, $this->compareFlags);
 		}
-		
+
 		return $content;
 	}
-	
+
 	function getColSelector() {
 		$content = '';
 		$i = 0;
-		
+
 		foreach($this->MOD_MENU['showCols'] as $key => $label) {
 			$content .= '<span style="display: block; float: left; width: 180px;">'
 				.'<input type="checkbox" value="1" name="compareFlags['.$key.']"'.($this->compareFlags[$key]?' checked="checked"':'').' />'
 				.'&nbsp;'.$label.'</span> '.chr(10);
-			
+
 			$i++;
 			if($i == 4) {
 				$content .= chr(10).'<br />'.chr(10);
 				$i = 0;
 			}
 		}
-		
+
 		$content .= '<br style="clear: left;" /><br />';
 		$content .= '<input type="submit" name="ads" value="Update" />';
 		$content .= '<br />';
-		
+
 		return $content;
 	}
-	
+
 	function getUserViewHeader($userRecord) {
 		$content = '';
-		
+
 		$alttext = t3lib_BEfunc::getRecordIconAltText($userRecord, $this->table);
 		$recTitle = htmlspecialchars(t3lib_BEfunc::getRecordTitle($this->table, $userRecord));
-		
+
 			// icon
 		$iconImg = t3lib_iconWorks::getIconImage(
-			$this->table, 
+			$this->table,
 			$userRecord,
 			$this->backPath,
 			'title="'.htmlspecialchars($alttext).'"'
-		);		
+		);
 			// controls
 		$control = $this->makeUserControl($userRecord);
 
 		$content .= $iconImg.' '.$recTitle.' '.$control;
-		
+
 		return $content;
 	}
-	
+
 	function makeUserControl($userRecord) {
-		
+
 			// edit
 		$control = '<a href="#" onclick="'.htmlspecialchars(
 			$this->editOnClick(
@@ -421,12 +414,12 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 			'gfx/edit2.gif',
 			'width="11" height="12"'
 		).' title="edit" alt="" /></a>'.chr(10);
-		
+
 			//info
 		$control .= '<a href="#" onclick="'.htmlspecialchars('top.launchView(\''.$this->table.'\', \''.$userRecord['uid'].'\'); return false;').'">'.
 			'<img'.t3lib_iconWorks::skinImg($this->backPath,'gfx/zoom2.gif','width="12" height="12"').' title="" alt="" />'.
 			'</a>'.chr(10);
-			
+
 			// hide/unhide
 		$hiddenField = $GLOBALS['TCA'][$this->table]['ctrl']['enablecolumns']['disabled'];
 		if ($userRecord[$hiddenField])	{
@@ -440,7 +433,7 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 					'<img'.t3lib_iconWorks::skinImg($this->backPath,'gfx/button_hide.gif','width="11" height="10"').' title="hide" alt="" />'.
 					'</a>'.chr(10);
 		}
-		
+
 			// delete
 		$params = '&cmd['.$this->table.']['.$userRecord['uid'].'][delete]=1';
 		$control .= '<a href="#" onclick="'.htmlspecialchars('if (confirm('.
@@ -455,20 +448,20 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 			).'">'.
 			'<img'.t3lib_iconWorks::skinImg($this->backPath,'gfx/garbage.gif','width="11" height="12"').' title="'.$GLOBALS['LANG']->getLL('delete',1).'" alt="" />'.
 			'</a>'.chr(10);
-			
+
 			// swith user / switch user back
 		if( ! $userRecord[$hiddenField] && $GLOBALS['BE_USER']->isAdmin() ){
 			$control .= '<a href="'.t3lib_div::linkThisScript(array('SwitchUser'=>$userRecord['uid'])).'" target="_top"><img '.t3lib_iconWorks::skinImg($this->backPath,'gfx/su.gif').' border="0" align="top" title="'.htmlspecialchars('Switch user to: '.$userRecord['username']).' [change-to mode]" alt="" /></a>'.
 						'<a href="'.t3lib_div::linkThisScript(array('SwitchUser'=>$userRecord['uid'], 'switchBackUser' => 1)).'" target="_top"><img '.t3lib_iconWorks::skinImg($this->backPath,'gfx/su_back.gif').' border="0" align="top" title="'.htmlspecialchars('Switch user to: '.$userRecord['username']).' [switch-back mode]" alt="" /></a>'
 						.chr(10).chr(10);
 		}
-	
-		return $control;	
+
+		return $control;
 	}
-	
+
 	/**
 	 * ingo.renner@dkd.de: from t3lib_BEfunc, modified
-	 * 
+	 *
 	 * Returns a JavaScript string (for an onClick handler) which will load the alt_doc.php script that shows the form for editing of the record(s) you have send as params.
 	 * REMEMBER to always htmlspecialchar() content in href-properties to ampersands get converted to entities (XHTML requirement and XSS precaution)
 	 * Usage: 35
@@ -483,7 +476,7 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 		$retUrl = 'returnUrl='.($requestUri==-1?"'+T3_THIS_LOCATION+'":rawurlencode($requestUri?$requestUri:t3lib_div::getIndpEnv('REQUEST_URI')));
 		return "window.location.href='".$backPath."index.php?".$retUrl.$params."'; return false;";
 	}
-	
+
 	/**
 	 * [Describe function...]
 	 * ingo.renner@dkd.de: from tools/beusers
@@ -519,19 +512,19 @@ if(t3lib_div::_POST('ajaxCall')) {
 	$groupId  = t3lib_div::_POST('groupId');
 	$open     = t3lib_div::_POST('open');
 	$backPath = t3lib_div::_POST('backPath');
-				
+
 	$userView = t3lib_div::makeInstance('tx_tcbeuser_overview');
 	$content  = $userView->handleMethod( $method, $groupId, $open, $backPath );
-				
+
 	echo $content;
 } else {
 	// Make instance:
 	$SOBE = t3lib_div::makeInstance('tx_tcbeuser_module4');
 	$SOBE->init();
-	
+
 	// Include files?
 	foreach($SOBE->include_once as $INC_FILE)	include_once($INC_FILE);
-	
+
 	$SOBE->main();
 	$SOBE->printContent();
 }

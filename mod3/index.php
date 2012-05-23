@@ -58,19 +58,19 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 	var $MOD_MENU = array();
 	var $MOD_SETTINGS = array();
 	var $pageinfo;
-	
+
 	function main() {
 		$this->init();
-		
+
 		// The page will show only if there is a valid page and if this page may be viewed by the user
 		#$this->pageinfo = tx_tcbeuser_access::readPageAccess();
 		#$access = is_array($this->pageinfo) ? 1 : 0;
-		
+
 		//TODO more access check!?
-		$access = $GLOBALS['BE_USER']->modAccess($this->MCONF, true);	
-		
+		$access = $GLOBALS['BE_USER']->modAccess($this->MCONF, true);
+
 		if ($access || $GLOBALS['BE_USER']->isAdmin()) {
-			
+
 			$title = $GLOBALS['LANG']->getLL('title');
 			$menu  = t3lib_BEfunc::getFuncMenu(
 				$this->id,
@@ -78,35 +78,35 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 				$this->MOD_SETTINGS['function'],
 				$this->MOD_MENU['function']
 			);
-			
+
 			$moduleContent = $this->moduleContent();
-			
+
 				// all necessary JS code needs to be set before this line!
 			$this->tceforms = t3lib_div::makeInstance('t3lib_TCEforms');
 			$this->tceforms->backPath = $GLOBALS['BACK_PATH'];
 			$this->doc->JScode = $this->tceforms->JSbottom('editform');
 			$this->doc->JScode .= $this->doc->wrapScriptTags($this->jsCode);
-				
+
 			$this->content  = '';
 			$this->content .= $this->doc->startPage($title);
 			$this->content .= $this->doc->spacer(5);
-			$this->content .= $this->doc->section( 
+			$this->content .= $this->doc->section(
 				'',
 				$this->doc->funcMenu(
 					$this->doc->header($title),
 					$menu
 				)
 			);
-			$this->content .= $this->doc->divider(5);			
+			$this->content .= $this->doc->divider(5);
 			$this->content .= $moduleContent;
 
 			if ($GLOBALS['BE_USER']->mayMakeShortcut())	{
 				$this->content .= $this->doc->spacer(20).
 							$this->doc->section('',$this->doc->makeShortcutIcon('','',$this->MCONF['name']));
-			}			
+			}
 		}
 	}
-	
+
 	/**
 	 * First initialization.
 	 *
@@ -166,7 +166,7 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 			tx_tcbeuser_config::fakeAdmin();
 			$fakeAdmin = 1;
 		}
-	
+
 			// GPvars specifically for processing:
 		$this->data = t3lib_div::_GP('data');
 		$this->cmd = t3lib_div::_GP('cmd')?t3lib_div::_GP('cmd'):array();
@@ -176,11 +176,11 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 		$table = array_keys($incoming);
 		$uid = array_keys($incoming[$table[0]]);
 		$data = $incoming[$table[0]][$uid[0]];
-		
+
 		//check if title has prefix. if not add it.
 		if (isset($BE_USER->userTS['tx_tcbeuser.']['createWithPrefix']) && !empty($BE_USER->userTS['tx_tcbeuser.']['createWithPrefix'])){
 			$prefix = $BE_USER->userTS['tx_tcbeuser.']['createWithPrefix'];
-			
+
 			if ( strpos($data['title'],$prefix) !== 0 && ! ( $this->MOD_SETTINGS['function'] == 'action' && isset($data['hidden']) ) )	{
 				$this->data[$table[0]][$uid[0]]['title'] = $prefix.' '.$this->data[$table[0]][$uid[0]]['title'];
 			}
@@ -202,28 +202,28 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 				// Only options related to $this->data submission are included here.
 			$tce = t3lib_div::makeInstance('t3lib_TCEmain');
 			$tce->stripslashes_values=0;
-	
+
 				// Setting default values specific for the user:
 			$TCAdefaultOverride = $BE_USER->getTSConfigProp('TCAdefaults');
 			if (is_array($TCAdefaultOverride))	{
 				$tce->setDefaultsFromUserTS($TCAdefaultOverride);
 			}
-	
+
 				// Setting internal vars:
 			if ($BE_USER->uc['neverHideAtCopy'])	{	$tce->neverHideAtCopy = 1;	}
 			$tce->debug=0;
 			$tce->disableRTE = $this->disableRTE;
-	
+
 				// Loading TCEmain with data:
 			$tce->start($this->data,$this->cmd);
 			if (is_array($this->mirror))	{	$tce->setMirror($this->mirror);	}
-	
+
 				// If pages are being edited, we set an instruction about updating the page tree after this operation.
 			if (isset($this->data['pages']))	{
-				t3lib_BEfunc::getSetUpdateSignal('updatePageTree');
+				t3lib_BEfunc::setUpdateSignal('updatePageTree');
 			}
-	
-	
+
+
 				// Checking referer / executing
 			$refInfo=parse_url(t3lib_div::getIndpEnv('HTTP_REFERER'));
 			$httpHost = t3lib_div::getIndpEnv('TYPO3_HOST_ONLY');
@@ -231,18 +231,18 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 				$tce->log('',0,0,0,1,"Referer host '%s' and server host '%s' did not match and veriCode was not valid either!",1,array($refInfo['host'],$httpHost));
 				debug('Error: Referer host did not match with server host.');
 			} else {
-	
+
 					// Perform the saving operation with TCEmain:
 				$tce->process_uploads($_FILES);
 				$tce->process_datamap();
 				$tce->process_cmdmap();
-	
+
 					// If there was saved any new items, load them:
 				if (count($tce->substNEWwithIDs_table))	{
-	
+
 						// Resetting editconf:
 					$this->editconf = array();
-	
+
 						// Traverse all new records and forge the content of ->editconf so we can continue to EDIT these records!
 					foreach($tce->substNEWwithIDs_table as $nKey => $nTable)	{
 						$editId = $tce->substNEWwithIDs[$nKey];
@@ -250,31 +250,31 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 						if ($versionRec = t3lib_BEfunc::getWorkspaceVersionOfRecord($GLOBALS['BE_USER']->workspace, $nTable, $editId,'uid'))	{
 							$editId = $versionRec['uid'];
 						}
-	
+
 						$this->editconf[$nTable][$editId]='edit';
 						if ($nTable=='pages' && $this->retUrl!='dummy.php' && $this->returnNewPageId)	{
 							$this->retUrl.='&id='.$tce->substNEWwithIDs[$nKey];
 						}
 					}
 				}
-	
+
 					// See if any records was auto-created as new versions?
 				if (count($tce->autoVersionIdMap))	{
 					$this->fixWSversioningInEditConf($tce->autoVersionIdMap);
 				}
-	
+
 					// If a document is saved and a new one is created right after.
 				if (isset($_POST['_savedoknew_x']) && is_array($this->editconf))	{
-	
+
 						// Finding the current table:
 					reset($this->editconf);
 					$nTable=key($this->editconf);
-	
+
 						// Finding the first id, getting the records pid+uid
 					reset($this->editconf[$nTable]);
 					$nUid=key($this->editconf[$nTable]);
 					$nRec = t3lib_BEfunc::getRecord($nTable,$nUid,'pid,uid');
-	
+
 						// Setting a blank editconf array for a new record:
 					$this->editconf=array();
 					if ($this->getNewIconMode($nTable)=='top')	{
@@ -283,7 +283,7 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 						$this->editconf[$nTable][-$nRec['uid']]='new';
 					}
 				}
-	
+
 				$tce->printLogErrorMessages(
 					isset($_POST['_saveandclosedok_x']) ?
 					$this->retUrl :
@@ -294,7 +294,7 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 		if (isset($_POST['_saveandclosedok_x']) || $this->closeDoc<0)	{	//  || count($tce->substNEWwithIDs)... If any new items has been save, the document is CLOSED because if not, we just get that element re-listed as new. And we don't want that!
 			$this->closeDocument(abs($this->closeDoc));
 		}
-		
+
 		if($fakeAdmin){
 			tx_tcbeuser_config::removeFakeAdmin();
 		}
@@ -312,14 +312,14 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 		Header('Location: '.$this->retUrl);
 		exit;
 	}
-	
-	function init() {	
+
+	function init() {
 		parent::init();
-		
+
 		$this->doc = t3lib_div::makeInstance('bigDoc');
 		$this->doc->backPath = $GLOBALS['BACK_PATH'];
 		$this->doc->docType  = 'xhtml_trans';
-//		$this->doc->form = '<form action="" method="post">';	
+//		$this->doc->form = '<form action="" method="post">';
 		$this->doc->form = '<form action="'.htmlspecialchars($this->R_URI).'" method="post" enctype="'.$GLOBALS['TYPO3_CONF_VARS']['SYS']['form_enctype'].'" name="editform" onsubmit="return TBE_EDITOR_checkSubmit(1);">';
 			// JavaScript
 		$this->doc->postCode='
@@ -328,14 +328,14 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 				if (top.fsMod) top.fsMod.recentIds["web"] = 0;
 			</script>
 		';
-		
+
 		$this->jsCode = '
 			script_ended = 0;
 			function jumpToUrl(URL)	{
 				document.location = URL;
 			}
 		';
-		
+
 		$this->id = 0;
 		$this->search_field = t3lib_div::_GP('search_field');
 		$this->pointer = t3lib_div::intInRange(
@@ -344,8 +344,8 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 			100000
 		);
 		$this->table = 'be_groups';
-		
-			// if going to edit a record, a menu item is dynamicaly added to 
+
+			// if going to edit a record, a menu item is dynamicaly added to
 			// the dropdown which is otherwise not visible
 		$SET = t3lib_div::_GET('SET');
 		if(isset($SET['function']) && $SET['function'] == 'edit') {
@@ -354,12 +354,12 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 			$this->doc->form = '<form action="'.htmlspecialchars($this->R_URI).'" method="post" enctype="'.$GLOBALS['TYPO3_CONF_VARS']['SYS']['form_enctype'].'" name="editform" onsubmit="return TBE_EDITOR_checkSubmit(1);">';
 			$this->editconf = t3lib_div::_GET('edit');
 		}
-		
+
 		if($SET['function'] == 'action'){
 			$this->MOD_SETTINGS['function'] = $SET['function'];
 		}
-	}	
-	
+	}
+
 	/**
 	 * Adds items to the ->MOD_MENU array. Used for the function menu selector.
 	 *
@@ -375,29 +375,25 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 		);
 		parent::menuConfig();
 	}
-	
+
 	/**
 	 * Generates the module content
 	 *
 	 * @return	void
 	 */
 	function moduleContent() {
-		$content = '';		
-		$debug_content = '<br />This is the GET/POST vars sent to the script:<br />'.
-			'GET:'.t3lib_div::view_array($_GET).'<br />'.
-			'POST:'.t3lib_div::view_array($_POST).'<br />'.
-			'';
-			
+		$content = '';
+
 		if(!empty($this->editconf)){
 			$this->MOD_SETTINGS['function'] = 'edit';
 		}
-				
+
 		switch((string)$this->MOD_SETTINGS['function'])	{
 			case '1':
 					// list groups
 				t3lib_BEfunc::lockRecords();
 				$content .= $this->doc->section(
-					'', 
+					'',
 					$this->getGroupList()
 				);
 //				$content .= $debug_content;
@@ -418,7 +414,7 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 					// edit group
 				#$param = t3lib_div::_GET('edit');
 				#$beuserUid = array_search('edit', $param['be_users']);
-				
+
 				$content .= $this->doc->section(
 					'',
 					$this->getGroupEdit()
@@ -430,15 +426,15 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 				Header('Location: '.t3lib_div::locationHeaderUrl(t3lib_div::_GP('redirect')));
 			break;
 		}
-		
+
 		return $content;
 	}
-	
+
 	function printContent()	{
 		$this->content .= $this->doc->endPage();
 		echo $this->content;
 	}
-	
+
 	function getGroupList() {
 		$content = '';
 		$dblist = t3lib_div::makeInstance('tx_tcbeuser_recordList');
@@ -455,12 +451,12 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 		$dblist->analyzeParam = 'beGroup';
 
 		$dblist->start(0, $this->table, $this->pointer, $this->search_field);
-		
+
 			// default sorting, needs to be set after $dblist->start()
 		$sort = t3lib_div::_GET('sortField');
 		if(is_null($sort)) {
 			$dblist->sortField = 'title';
-		}		
+		}
 		$dblist->generateList();
 		$content .= $dblist->HTMLcode ? $dblist->HTMLcode : $GLOBALS['LANG']->sL('LLL:EXT:tc_beuser/mod3/locallang.xml:not-found').'<br />';
 		$content .= $dblist->getSearchBox(
@@ -477,15 +473,15 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 		'<img'.t3lib_iconWorks::skinImg($this->doc->backPath,'gfx/new_el.gif','width="11" height="12"').' alt="'.$GLOBALS['LANG']->getLL('create-group').'" />'.
 		$GLOBALS['LANG']->getLL('create-group').
 		'</a>';
-				
+
 		$this->jsCode .= $this->doc->redirectUrls($dblist->listURL())."\n";
-		
+
 		return $content;
 	}
-	
+
 	function getGroupEdit() {
 		$content = '';
-		
+
 		$this->tceforms = t3lib_div::makeInstance('t3lib_TCEforms');
 		$this->tceforms->backPath = $this->doc->backPath;
 		$this->tceforms->initDefaultBEMode();
@@ -496,7 +492,7 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 
 			// Setting external variables:
 		#if ($BE_USER->uc['edit_showFieldHelp']!='text')	$this->tceforms->edit_showFieldHelp='text';
-			
+
 			// Creating the editing form, wrap it with buttons, document selector etc.
 			// Show only these columns
 		$this->editForm = t3lib_div::makeInstance('tx_tcbeuser_editform');
@@ -504,10 +500,10 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 		$this->editForm->columnsOnly = 'hidden,title,db_mountpoints,file_mountpoints,subgroup,members,description,TSconfig';
 		$this->editForm->editconf = $this->editconf;
 		$this->editForm->error = $this->error;
-		
+
 		$editForm = $this->editForm->makeEditForm();
 		$this->viewId = $this->editForm->viewId;
-		
+
 		if ($editForm)	{ // ingo.renner@dkd.de
 			reset($this->editForm->elementsData);
 			$this->firstEl = current($this->editForm->elementsData);
@@ -525,13 +521,13 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 								$this->tceforms->printNeededJSFunctions();
 			#$this->tceformMessages();
 		}
-			
+
 		return $content;
 	}
-	
+
 	/**
 	 * ingo.renner@dkd.de: from alt_doc.php, modified
-	 * 
+	 *
 	 * Create the panel of buttons for submitting the form or otherwise perform operations.
 	 *
 	 * @return	string		HTML code, comprised of images linked to various actions.
@@ -584,7 +580,7 @@ class  tx_tcbeuser_module3 extends t3lib_SCbase {
 		}
 		return $panel;
 	}
-	
+
 	/**
 	 * Put together the various elements (buttons, selectors, form) into a table
 	 *

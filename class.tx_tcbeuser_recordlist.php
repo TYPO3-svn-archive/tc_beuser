@@ -32,9 +32,9 @@ require_once('class.tx_tcbeuser_config.php');
  * $Id$
  *
  * @author Ingo Renner <ingo.renner@dkd.de>
- */ 
+ */
 class tx_tcbeuser_recordList extends localRecordList {
-	
+
 	var $showFields;
 	var $userMainGroupOnly = false;
 	var $hideDisabledRecords = false;
@@ -114,7 +114,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 			}
 		}
 	}
-	
+
 	/**
 	 * Creates the listing of records from a single table
 	 *
@@ -137,11 +137,11 @@ class tx_tcbeuser_recordList extends localRecordList {
 
 			// Cleaning rowlist for duplicates and place the $titleCol as the first column always!
 		$this->fieldArray=array();
-		
+
 			// ingo.renner@dkd.de
-		#$this->fieldArray[] = $titleCol;	// Add title column		
+		#$this->fieldArray[] = $titleCol;	// Add title column
 		$this->fieldArray = explode(',', $rowlist);
-		
+
 		if ($this->localizationView && $l10nEnabled)	{
 			$this->fieldArray[] = '_LOCALIZATION_';
 			$this->fieldArray[] = '_LOCALIZATION_b';
@@ -212,7 +212,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 				.$GLOBALS['TCA'][$table]['ctrl']['enablecolumns']['disabled']
 				.' = 0';
 		}
-		
+
 			//ingo.renner@dkd.de
 		if($GLOBALS['BE_USER']->user['admin'] == '0' && $table == 'be_users') {
 			$addWhere .= ' AND admin = 0';
@@ -221,7 +221,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 		//dkd-kartolo
 		//mod2, exclude fe_user which is also be_user
 		if($table == 'fe_users'){
-			$addWhere .= ' AND username not in '.$this->excludeBE;	
+			$addWhere .= ' AND username not in '.$this->excludeBE;
 		}
 
 		//dkd-kartolo
@@ -280,7 +280,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 
 			if($this->showFields[0] != $titleCol){
 				unset($theData[$titleCol]);
-			} 
+			}
 
 			if ($LOISmode)	{
 				$out.='
@@ -409,7 +409,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 			// Return content:
 		return $out;
 	}
-	
+
 	/**
 	 * Rendering the header row for a table
 	 *
@@ -505,7 +505,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 			// Create and return header table row:
 		return $this->addelement(1,'',$theData,' class="c-headLine"','');
 	}
-	
+
 	/**
 	 * Rendering a single row for the list
 	 *
@@ -611,7 +611,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 			// Finally, return table row element:
 		return $iOut;
 	}
-	
+
 	function getUserMainGroup($allGroups) {
 		$allGroups = explode(',', $allGroups);
 		if(!empty($allGroups[0])) {
@@ -620,11 +620,11 @@ class tx_tcbeuser_recordList extends localRecordList {
 				'be_groups',
 				'uid = '.$allGroups[0]
 			);
-		}	
-		
+		}
+
 		return $mainGroup[0]['title'];
 	}
-	
+
 	/**
 	 * Creates the search box
 	 *
@@ -640,7 +640,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 		}
 
 			// Table with the search box:
-		$content.= '
+		$content = '
 			'.$formElements[0].'
 
 				<!--
@@ -653,13 +653,13 @@ class tx_tcbeuser_recordList extends localRecordList {
 					</tr>
 				</table>
 			'.$formElements[1];
-		
+
 		return $content;
 	}
-	
+
 	/**
 	 * ingo.renner@dkd.de: from t3lib_BEfunc, modified
-	 * 
+	 *
 	 * Returns a JavaScript string (for an onClick handler) which will load the alt_doc.php script that shows the form for editing of the record(s) you have send as params.
 	 * REMEMBER to always htmlspecialchar() content in href-properties to ampersands get converted to entities (XHTML requirement and XSS precaution)
 	 * Usage: 35
@@ -674,7 +674,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 		$retUrl = 'returnUrl='.($requestUri==-1?"'+T3_THIS_LOCATION+'":rawurlencode($requestUri?$requestUri:t3lib_div::getIndpEnv('REQUEST_URI')));
 		return "window.location.href='".$backPath."index.php?".$retUrl.$params."'; return false;";
 	}
-	
+
 	/**
 	 * Creates the control panel for a single record in the listing.
 	 *
@@ -705,7 +705,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 					'<img'.t3lib_iconWorks::skinImg($this->backPath,'gfx/edit2'.(!$TCA[$table]['ctrl']['readOnly']?'':'_d').'.gif','width="11" height="12"').' title="'.$LANG->getLL('edit',1).'" alt="" />'.
 					'</a>';
 		}
-		
+
 			//dkd-kartolo
 			//show magnifier (mod4)
 		if(!$this->disableControls['detail']){
@@ -715,7 +715,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 				'<img '.t3lib_iconWorks::skinImg($this->backPath,'gfx/zoom.gif','width="12" height="12"').'title="'.$this->analyzeLabel.'" alt="" />'.
 				'</a>';
 		}
-		
+
 			//dkd-kartolo
 			//show import fe user icon
 		if(!$this->disableControls['import']){
@@ -778,11 +778,11 @@ class tx_tcbeuser_recordList extends localRecordList {
 											<!-- CONTROL PANEL: '.$table.':'.$row['uid'].' -->
 											<div class="typo3-DBctrl">'.implode('',$cells).'</div>';
 	}
-	
+
 	/**
 	 * create link for the hide/unhide and delete icon.
 	 * not using tce_db.php, because we need to manipulate user's permission
-	 * 
+	 *
 	 * @param	string		param with command (hide/unhide, delete) and records id
 	 * @param	string		redirect link, after process the command
 	 * @return	string		jumpTo URL link with redirect
@@ -793,7 +793,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 				'&prErr=1&uPT=1';
 		return t3lib_div::getIndpEnv('SCRIPT_NAME').$params.$redirect;
 	}
-	
+
 	/**
 	 * Creates the URL to this script, including all relevant GPvars
 	 * Fixed GPvars are id, table, imagemode, returlUrl, search_field, search_levels and showLimit
@@ -820,7 +820,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 			($this->showLimit?'&showLimit='.rawurlencode($this->showLimit):'').
 			((!$exclList || !t3lib_div::inList($exclList,'sortField')) && $this->sortField?'&sortField='.rawurlencode($this->sortField):'').
 			((!$exclList || !t3lib_div::inList($exclList,'sortRev')) && $this->sortRev?'&sortRev='.rawurlencode($this->sortRev):'')
-			;		
+			;
 	}
 }
 
