@@ -258,7 +258,7 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 
 			$this->id = 0;
 			$this->search_field = t3lib_div::_GP('search_field');
-			$this->pointer = t3lib_div::intInRange(
+			$this->pointer = $this->compatibility()->intInRange(
 				t3lib_div::_GP('pointer'),
 				0,
 				100000
@@ -312,7 +312,7 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 
 			$this->id = 0;
 			$this->search_field = t3lib_div::_GP('search_field');
-			$this->pointer = t3lib_div::intInRange(
+			$this->pointer = $this->compatibility()->intInRange(
 				t3lib_div::_GP('pointer'),
 				0,
 				100000
@@ -497,6 +497,13 @@ class  tx_tcbeuser_module4 extends t3lib_SCbase {
 			header('Location: '.t3lib_div::locationHeaderUrl($GLOBALS['BACK_PATH'].'index.php'.($GLOBALS['TYPO3_CONF_VARS']['BE']['interfaces']?'':'?commandLI=1')));
 			exit;
 		}
+	}
+
+	/**
+	 * @return tx_cbeuser_compatibility
+	 */
+	protected function compatibility() {
+		return tx_tcbeuser_compatibility::getInstance();
 	}
 }
 

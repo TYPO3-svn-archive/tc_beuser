@@ -340,7 +340,7 @@ class  tx_tcbeuser_module5 extends t3lib_SCbase {
 
 		$this->id = 0;
 		$this->search_field = t3lib_div::_GP('search_field');
-		$this->pointer = t3lib_div::intInRange(
+		$this->pointer = $this->compatibility()->intInRange(
 			t3lib_div::_GP('pointer'),
 			0,
 			100000
@@ -653,6 +653,13 @@ class  tx_tcbeuser_module5 extends t3lib_SCbase {
 		$formContent.='<input type="hidden" name="_disableRTE" value="'.$this->tceforms->disableRTE.'" />';
 
 		return $formContent;
+	}
+
+	/**
+	 * @return tx_cbeuser_compatibility
+	 */
+	protected function compatibility() {
+		return tx_tcbeuser_compatibility::getInstance();
 	}
 }
 

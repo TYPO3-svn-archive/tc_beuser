@@ -1,3 +1,6 @@
+2013-06-20 Ivan Kartolo <ivan.kartolo@dkd.de>
+	* Bug #49283: compatibility with 6.0
+
 2012-06-24 Ivan Kartolo <ivan.kartolo@dkd.de>
 	* Bug #37394: remove deprecated view_array calls
 	* Bug #31855: hide _cli User from non admin user
