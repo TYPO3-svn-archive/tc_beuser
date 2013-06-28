@@ -27,14 +27,14 @@ $EM_CONF[$_EXTKEY] = array(
 	'modify_tables' => '',
 	'clearcacheonload' => 0,
 	'lockType' => '',
-	'author' => 'Ingo Renner',
-	'author_email' => 'ingo.renner@dkd.de',
+	'author' => 'dkd Internet Service GmbH',
+	'author_email' => 'typo3@dkd.de',
 	'author_company' => '',
 	'CGLcompliance' => '',
 	'CGLcompliance_note' => '',
 	'constraints' => array(
 		'depends' => array(
-			'typo3' => '4.5.0-0.0.0',
+			'typo3' => '4.6.0-6.99.99',
 		),
 		'conflicts' => array(
 		),
