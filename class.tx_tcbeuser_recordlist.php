@@ -286,7 +286,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 			if ($LOISmode)	{
 				$out.='
 					<tr>
-						<td class="c-headLineTable" style="width:95%;">'.$theData[$titleCol].'</td>
+						<td class="t3-row-header" style="width:95%;">'.$theData[$titleCol].'</td>
 					</tr>';
 
 				if ($GLOBALS['BE_USER']->uc["edit_showFieldHelp"])	{
@@ -305,7 +305,7 @@ class tx_tcbeuser_recordList extends localRecordList {
 					1,
 					$theUpIcon,
 					$theData,
-					' class="c-headLineTable"',
+					' class="t3-row-header"',
 					''
 				);
 			}
@@ -539,6 +539,8 @@ class tx_tcbeuser_recordList extends localRecordList {
 
 			// Overriding with versions background color if any:
 		$row_bgColor = $row['_CSSCLASS'] ? ' class="'.$row['_CSSCLASS'].'"' : $row_bgColor;
+
+		$row_bgColor = 'class="db_list_normal"';
 
 			// Initialization
 		$alttext = t3lib_BEfunc::getRecordIconAltText($row,$table);

@@ -102,10 +102,10 @@ class tx_tcbeuser_overview {
 				$tree = $this->getGroupTree($groupId);
 
 				foreach($tree as $row)	{
-					$tCells = $this->renderListRow($setCols, $row, ($cc%2 ? 'db_list_alt':''));
+					$tCells = $this->renderListRow($setCols, $row,'');
 
 					$out .= '
-<tr>
+<tr class="db_list_normal">
 	'.implode('',$tCells).'
 </tr>';
 					$cc++;
@@ -137,10 +137,10 @@ class tx_tcbeuser_overview {
 			$tree = $this->getGroupTree($groupId);
 
 			foreach($tree as $row)	{
-				$tCells = $this->renderListRow($setCols, $row, ($cc%2 ? 'db_list_alt':''));
+				$tCells = $this->renderListRow($setCols, $row, '');
 
 				$out .= '
-<tr>
+<tr class="db_list_normal">
 	'.implode('',$tCells).'
 </tr>';
 				$cc++;
@@ -159,7 +159,7 @@ class tx_tcbeuser_overview {
 
 		$content .= '
 			<tr>
-				<td class="c-headLineTable" colspan="'.(count($setCols) + 2).'">&nbsp;</td>
+				<td class="t3-row-header" colspan="'.(count($setCols) + 2).'">&nbsp;</td>
 			</tr>'."\n";
 
 		$content .= '<tr>'."\n";
